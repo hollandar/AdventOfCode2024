@@ -16,7 +16,7 @@ public struct Line
         long a = p2.Y - p1.Y;
         long b = p2.X - p1.X;
         this.m = a / b;
-        this.c =(long)( p1.Y - m * p1.X);
+        this.c = (long)(p1.Y - m * p1.X);
     }
 
     public static Line FromPoints(Point p1, Point p2)

@@ -25,7 +25,7 @@ public static class ProblemRunner<TProblem, TReturn> where TProblem : IProblem<T
         }
         else
         {
-            Console.WriteLine($"No example file found {exampleFile}.");
+            Console.WriteLine($"\nNo example file found {exampleFile}.");
         }
 
         var problemFile = $"./in/{fBase}1.txt";
@@ -44,7 +44,7 @@ public static class ProblemRunner<TProblem, TReturn> where TProblem : IProblem<T
         }
         else
         {
-            Console.WriteLine($"No problem file found {exampleFile}.");
+            Console.WriteLine($"\nNo problem file found {exampleFile}.");
         }
     }
 }

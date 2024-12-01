@@ -19,7 +19,7 @@ public class Area
         return bounds.Any(b => b.Contains(p));
     }
 
-    public Point Right(Point p)
+    public Point East(Point p)
     {
         var right = p.East();
         if (!Contains(right))
@@ -32,7 +32,7 @@ public class Area
         return right;
     }
 
-    public Point Down(Point p)
+    public Point South(Point p)
     {
         var down = p.South();
         if (!Contains(down))
@@ -45,7 +45,7 @@ public class Area
         return down;
     }
 
-    public Point Left(Point p)
+    public Point West(Point p)
     {
         var left = p.West();
         if (!Contains(left))
@@ -58,7 +58,7 @@ public class Area
         return left;
     }
 
-    public Point Up(Point p)
+    public Point North(Point p)
     {
         var up = p.North();
         if (!Contains(up))

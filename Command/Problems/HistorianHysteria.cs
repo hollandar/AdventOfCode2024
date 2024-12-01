@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Command.Problems;
 
-internal class HistorianHysteria : ProblemBase<int>
+
+public partial class HistorianHysteria : ProblemBase<int>
 {
     List<int> l1 = new List<int>();
     List<int> l2 = new List<int>();
@@ -16,11 +18,15 @@ internal class HistorianHysteria : ProblemBase<int>
     {
     }
 
+    [GeneratedRegex(@"^(\d+)\s*(\d+)$", RegexOptions.Singleline)]
+    private static partial Regex LineRegex();
+
     protected override void Line(string line)
     {
-        var items = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        l1.Add(int.Parse(items[0]));
-        l2.Add(int.Parse(items[1]));
+        var match = LineRegex().Match(line);
+        Debug.Assert(match.Success, $"Failed to match {line}");
+        l1.Add(int.Parse(match.Groups[1].Value));
+        l2.Add(int.Parse(match.Groups[2].Value));
     }
 
     public override int CalculateOne()
