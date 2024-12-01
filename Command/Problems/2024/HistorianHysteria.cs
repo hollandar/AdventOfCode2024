@@ -1,13 +1,8 @@
 ﻿using Command.Framework;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace Command.Problems;
+namespace Command.Problems._2024;
 
 
 public partial class HistorianHysteria : ProblemBase<int>
