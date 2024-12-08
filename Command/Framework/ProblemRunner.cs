@@ -7,7 +7,7 @@ public static class ProblemRunner<TProblem, TReturn> where TProblem : IProblem<T
     public static void Run(string fBase)
     {
         Console.WriteLine(typeof(TProblem).FullName);
-        Console.WriteLine(new string('-', typeof(TProblem).FullName.Length));
+        Console.WriteLine(new string('-', typeof(TProblem).FullName?.Length ?? 0));
         var problem = new TProblem();
         var exampleFileA = $"./in/{fBase}0a.txt";
         var exampleFileB = $"./in/{fBase}0b.txt";

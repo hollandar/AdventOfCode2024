@@ -1,9 +1,11 @@
-﻿namespace Command.Primitives;
+﻿using Command.Lib.Primitives;
+
+namespace Command.Primitives;
 
 public struct Line
 {
-    private float m; // gradient
-    private long c; // y-intercept
+    private double m; // gradient
+    private double c; // y-intercept
 
     public Line(float m, long c)
     {
@@ -13,10 +15,10 @@ public struct Line
 
     public Line(Point p1, Point p2)
     {
-        long a = p2.Y - p1.Y;
-        long b = p2.X - p1.X;
+        double a = p2.Y - p1.Y;
+        double b = p2.X - p1.X;
         this.m = a / b;
-        this.c = (long)(p1.Y - m * p1.X);
+        this.c = p1.Y - (m * p1.X);
     }
 
     public static Line FromPoints(Point p1, Point p2)
@@ -24,13 +26,28 @@ public struct Line
         return new Line(p1, p2);
     }
 
-    public long Y_GivenX(long x)
+    public float Y_GivenX(double x)
     {
         return (long)(m * x + c);
     }
 
-    public long X_GivenY(long y)
+    public float X_GivenY(double y)
     {
         return (long)((y - c) / m);
+    }
+
+    public Point PointGivenX(double x)
+    {
+        return new Point((long)Math.Round(x), (long)Math.Round(Y_GivenX(x)));
+    }
+
+    public Point PointGivenY(double y)
+    {
+        return new Point((long)Math.Round(X_GivenY(y)), (long)Math.Round(y));
+    }
+
+    public override string ToString()
+    {
+        return $"y = {m}x + {c}";
     }
 }

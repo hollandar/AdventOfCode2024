@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Command.Primitives;
+namespace Command.Lib.Primitives;
 
 public enum Orientation { _0, _90, _180, _270 }
 
