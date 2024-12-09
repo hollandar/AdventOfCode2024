@@ -108,9 +108,12 @@ public partial class DiskFragmenter : ProblemBase<long>
         // Reverse through the blocks moving the ones we can
         foreach (var dataBlock in dataBlocks)
         {
+            // Is there a free block as long as the data block? If not, skip this data block
             var emptyBlock = blocks.Where(r => r.item == -1 && r.length >= dataBlock.length && r.index < dataBlock.index).OrderBy(r => r.index).FirstOrDefault();
             if (emptyBlock is null) continue;
 
+
+            // Remove the empty block, insert a new one and the new data block
             var emptyBlockIndex = blocks.IndexOf(emptyBlock);
             blocks.RemoveAt(emptyBlockIndex);
             if (emptyBlock.length - dataBlock.length > 0)
@@ -119,6 +122,7 @@ public partial class DiskFragmenter : ProblemBase<long>
             }
             blocks.Insert(emptyBlockIndex, new Block(emptyBlock.index, dataBlock.item, dataBlock.length));
 
+            // Remove the old data block and replace it with an empty block at the same index
             var dataBlockIndex = blocks.IndexOf(dataBlock);
             blocks.RemoveAt(dataBlockIndex);
             blocks.Insert(dataBlockIndex, new Block(dataBlock.index, -1, dataBlock.length));
