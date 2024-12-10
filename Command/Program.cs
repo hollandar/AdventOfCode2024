@@ -19,4 +19,5 @@ using Command.Problems;
 //ProblemRunner<Command.Problems._2024.GuardGallivant, int>.Run("2024/GuardGallivant");
 //ProblemRunner<Command.Problems._2024.BridgeRepair, ulong>.Run("2024/BridgeRepair");
 //ProblemRunner<Command.Problems._2024.ResonantCollinearity, int>.Run("2024/ResonantCollinearity");
-ProblemRunner<Command.Problems._2024.DiskFragmenter, long>.Run("2024/DiskFragmenter");
+//ProblemRunner<Command.Problems._2024.DiskFragmenter, long>.Run("2024/DiskFragmenter");
+ProblemRunner<Command.Problems._2024.HoofIt, int>.Run("2024/HoofIt");
