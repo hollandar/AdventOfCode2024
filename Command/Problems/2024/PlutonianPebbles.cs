@@ -1,17 +1,18 @@
 ﻿
 using Command.Framework;
-using System.Diagnostics;
-using System.Reflection.Metadata;
-using System.Text.RegularExpressions;
+using Command.Lib.Extensions;
 
 namespace Command.Problems._2024;
 
+
 // Three important things to note:
-// If we store each outcome for future processing (say in a queue) we will run out of memory
+// If we store each outcome for future processing (say in a queue) we will run out of memory or time
 // Only the second rule adds to the length of the output
 // If you recalculate every stone, it will take too long, so stones at specific cycle depths are memoized
 
 // Also tried a queued search, and a linked list approach, both too slow to calculate part 2
+
+
 public partial class PlutonianPebbles : ProblemBase<long>
 {
     List<long> stones = new List<long>();
@@ -31,20 +32,21 @@ public partial class PlutonianPebbles : ProblemBase<long>
         var memo = new Dictionary<(long, int), long>();
         foreach (var stone in stones)
         {
-            count += 1;
-            CycleStone(stone, 0, cycles, ref count, memo);
+            count += 1;  // Count the stone itself
+            CycleStone(stone, cycles, ref count, memo);
         }
 
         return count;
     }
 
-    private void CycleStone(long stone, int cycle, int cycles, ref long count, Dictionary<(long, int), long> memo)
+    private void CycleStone(long stone, int remainingCycles, ref long count, Dictionary<(long stone, int remainingCycles), long> memo)
     {
-        if (cycle < cycles)
+        if (remainingCycles > 0)
         {
             // Check if we have seen this before, if we have, we use the memo outcome
-            if (memo.ContainsKey((stone, cycle))) {
-                count += memo[(stone, cycle)];
+            if (memo.ContainsKey((stone, remainingCycles)))
+            {
+                count += memo[(stone, remainingCycles)];
                 return;
             }
 
@@ -55,12 +57,12 @@ public partial class PlutonianPebbles : ProblemBase<long>
             long childrenCount = 0;
             foreach (var nextStone in nextStones)
             {
-                CycleStone(nextStone, cycle + 1, cycles, ref childrenCount, memo);
+                CycleStone(nextStone, remainingCycles - 1, ref childrenCount, memo);
             }
             count += childrenCount + thisCount;
 
             // Memoize the output at this cycle for use later
-            memo[(stone, cycle)] = childrenCount + thisCount;
+            memo[(stone, remainingCycles)] = childrenCount + thisCount;
         }
     }
 
@@ -68,11 +70,11 @@ public partial class PlutonianPebbles : ProblemBase<long>
 
     private long[] StepStone(long stone)
     {
-        var digits = CountSignificantDigits(stone);
+        var digits = stone.SignificantDigits();
         if (stone == 0)
         {
             // Rule 1 - If the stone is engraved with the number 0, it is replaced by a stone engraved with the number 1.
-            return new long[] { 1 };
+            return [1];
         }
         else if ((digits % 2) == 0)
         {
@@ -81,25 +83,13 @@ public partial class PlutonianPebbles : ProblemBase<long>
             // (The new numbers don't keep extra leading zeroes: 1000 would become stones 10 and 0.)
             var left = (int)(stone / Math.Pow(10, (digits / 2)));
             var right = (int)(stone % Math.Pow(10, (digits / 2)));
-            return new long[] { left, right };
+            return [left, right];
         }
         else
         {
             // Rule 3 - If none of the other rules apply, the stone is replaced by a new stone; the old stone's number multiplied by 2024 is engraved on the new stone.
-            return new long[] { stone * 2024 };
+            return [stone * 2024];
         }
-    }
-
-    public static int CountSignificantDigits(long number)
-    {
-        if (number == 0)
-        {
-            return 1; 
-        }
-
-        number = Math.Abs(number);
-
-        return (int)Math.Floor(Math.Log10(number) + 1);
     }
 
     public override long CalculateTwo()
@@ -109,8 +99,8 @@ public partial class PlutonianPebbles : ProblemBase<long>
         var memo = new Dictionary<(long, int), long>();
         foreach (var stone in stones)
         {
-            count += 1;
-            CycleStone(stone, 0, cycles, ref count, memo);
+            count += 1;  // Count the stone itself
+            CycleStone(stone, cycles, ref count, memo);
         }
 
         return count;
