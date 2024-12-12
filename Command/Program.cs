@@ -21,4 +21,5 @@ using Command.Problems;
 //ProblemRunner<Command.Problems._2024.ResonantCollinearity, int>.Run("2024/ResonantCollinearity");
 //ProblemRunner<Command.Problems._2024.DiskFragmenter, long>.Run("2024/DiskFragmenter");
 //ProblemRunner<Command.Problems._2024.HoofIt, int>.Run("2024/HoofIt");
-ProblemRunner < Command.Problems._2024.PlutonianPebbles, long>.Run("2024/PlutonianPebbles");
+//ProblemRunner < Command.Problems._2024.PlutonianPebbles, long>.Run("2024/PlutonianPebbles");
+ProblemRunner <Command.Problems._2024.GardenGroups, int>.Run("2024/GardenGroups");

@@ -50,12 +50,13 @@ public struct Point
         return Math.Abs(y - p.y) + 1;
     }
 
-    public static bool operator==(Point a, Point b) => a.Equals(b);
-    public static bool operator!=(Point a, Point b) => !(a.Equals(b));
+    public static bool operator ==(Point a, Point b) => a.Equals(b);
+    public static bool operator !=(Point a, Point b) => !(a.Equals(b));
 
     public override bool Equals(object? point)
     {
-        if (point is Point p){
+        if (point is Point p)
+        {
             return p.X == X && p.Y == Y;
         }
 
@@ -111,18 +112,6 @@ public struct Point
     public bool WithinBounds(long x2, long y2) => WithinBounds(Zero, new Point(x2, y2));
     public bool WithinBounds(long x1, long y1, long x2, long y2) => WithinBounds(new Point(x1, y1), new Point(x2, y2));
     public bool WithinBounds(Bounds bounds) => WithinBounds(bounds.TopLeft, bounds.BottomRight);
-    public IEnumerable<Point> AdjacentPoints(Bounds bounds)
-    {
-        if (!WithinBounds(bounds)) throw new Exception("Point is not within bounds");
-        if (X > bounds.TopLeft.X && Y > bounds.TopLeft.Y) yield return new Point(x - 1, y - 1);
-        if (Y > bounds.TopLeft.Y) yield return new Point(x, y - 1);
-        if (X < bounds.BottomRight.X && Y > bounds.TopLeft.Y) yield return new Point(x + 1, y - 1);
-        if (X > bounds.TopLeft.X) yield return new Point(x - 1, y);
-        if (X < bounds.BottomRight.X) yield return new Point(x + 1, y);
-        if (X > bounds.TopLeft.X && Y < bounds.BottomRight.Y) yield return new Point(x - 1, y + 1);
-        if (Y < bounds.BottomRight.Y) yield return new Point(x, y + 1);
-        if (X < bounds.BottomRight.X && Y < bounds.BottomRight.Y) yield return new Point(x + 1, y + 1);
-    }
 
     public Point NorthWest() => new Point(x - 1, y - 1);
     public Point North() => new Point(x, y - 1);
@@ -158,5 +147,35 @@ public struct Point
     }
 
     public static implicit operator Point((long x, long y) p) => new Point(p.x, p.y);
+
+    public IEnumerable<Point> AdjacentPointsWithoutDiagonals(Bounds bounds)
+    {
+        foreach (var point in AdjacentPointsWithoutDiagonals().Where(p => bounds.Contains(p))) yield return point;
+    }
+
+    public IEnumerable<Point> AdjacentPointsWithoutDiagonals()
+    {
+        yield return this.North();
+        yield return this.East();
+        yield return this.West();
+        yield return this.South();
+    }
+
+    public IEnumerable<Point> AdjacentPoints(Bounds bounds)
+    {
+        foreach (var point in AdjacentPoints().Where(p => bounds.Contains(p))) yield return point;
+    }
+
+    public IEnumerable<Point> AdjacentPoints()
+    {
+        yield return this.North();
+        yield return this.East();
+        yield return this.West();
+        yield return this.South();
+        yield return this.NorthEast();
+        yield return this.NorthWest();
+        yield return this.SouthEast();
+        yield return this.SouthWest();
+    }
 
 }

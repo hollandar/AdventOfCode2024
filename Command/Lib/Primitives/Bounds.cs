@@ -10,7 +10,7 @@ public struct Bounds
     public Point TopLeft { get; }
     public Point BottomRight { get; }
     public Orientation Orientation { get; }
-    
+
     public Bounds(Point topLeft, Point bottomRight, Orientation orientation = Orientation._0)
     {
         this.TopLeft = topLeft;
@@ -18,18 +18,26 @@ public struct Bounds
         this.Orientation = orientation;
     }
 
-    public Bounds(long x, long y) : this(new Point(0, 0), new Point(x, y)) { }
+    public Bounds(long x1, long y1, long x2, long y2) : this(new Point(x1, y1), new Point(x2, y2)) { }
 
+    public static Bounds ZeroToPoint(Point p) => new Bounds(0, 0, p.X, p.Y);
+    public static Bounds FromPoint(Point p) => new Bounds(p, p);
+    public static Bounds FromPoints(params IEnumerable<Point> points)
+    {
+        Bounds bounds = Bounds.FromPoint(points.First());
+        foreach (var point in points) bounds = bounds.Expand(point);
+        return bounds;
+    }
     public long Top => TopLeft.Y;
     public long Bottom => BottomRight.Y;
     public long Left => TopLeft.X;
     public long Right => BottomRight.X;
     public long Height => BottomRight.Y - TopLeft.Y + 1;
     public long Width => BottomRight.X - TopLeft.X + 1;
-    public Bounds LocalBounds => new Bounds(new Point(0, 0), new Point(Right - Left, Bottom - Top));
+    public Bounds LocalBounds => new Bounds((0, 0), (Right - Left, Bottom - Top));
 
-    public static Bounds Zero = new Bounds(0, 0);
-    
+    public static Bounds Zero = Bounds.FromPoint((0, 0));
+
     public Bounds Clone(Point? topLeft = null, Point? bottomRight = null)
     {
         return new Bounds(topLeft ?? TopLeft, bottomRight ?? BottomRight);
@@ -71,7 +79,6 @@ public struct Bounds
 
     public static bool operator ==(Bounds a, Bounds b) => a.TopLeft == b.TopLeft && a.BottomRight == b.BottomRight;
     public static bool operator !=(Bounds a, Bounds b) => !(a == b);
-
     public override bool Equals([NotNullWhen(true)] object? obj)
     {
         return obj is Bounds bounds && this == bounds;
@@ -91,5 +98,28 @@ public struct Bounds
     public override string ToString()
     {
         return $"{TopLeft} => {BottomRight}";
+    }
+
+    public Bounds Expand(Point p)
+    {
+        var bounds = this;
+        if (p.X < bounds.TopLeft.X)
+        {
+            bounds = new Bounds(new Point(p.X, bounds.TopLeft.Y), bounds.BottomRight);
+        }
+        if (p.Y < bounds.TopLeft.Y)
+        {
+            bounds = new Bounds(new Point(bounds.TopLeft.X, p.Y), bounds.BottomRight);
+        }
+        if (p.X > bounds.BottomRight.X)
+        {
+            bounds = new Bounds(bounds.TopLeft, new Point(p.X, bounds.BottomRight.Y));
+        }
+        if (p.Y > bounds.BottomRight.Y)
+        {
+            bounds = new Bounds(bounds.TopLeft, new Point(bounds.BottomRight.X, p.Y));
+        }
+
+        return bounds;
     }
 }
