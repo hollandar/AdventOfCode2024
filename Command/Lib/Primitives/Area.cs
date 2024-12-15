@@ -1,4 +1,4 @@
-﻿namespace Command.Primitives;
+﻿namespace Command.Lib.Primitives;
 
 public class Area
 {

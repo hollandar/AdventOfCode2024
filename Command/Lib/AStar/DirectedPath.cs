@@ -1,4 +1,4 @@
-﻿using Command.Primitives;
+﻿using Command.Lib.Primitives;
 
 namespace Command.Lib.AStar;
 
