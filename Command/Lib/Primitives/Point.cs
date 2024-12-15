@@ -1,6 +1,8 @@
-﻿using System.Diagnostics;
+﻿using Command.Lib.AStar;
+using Command.Problems._2024;
+using System.Diagnostics;
 
-namespace Command.Primitives;
+namespace Command.Lib.Primitives;
 
 public struct Point
 {
@@ -50,7 +52,11 @@ public struct Point
 
     public static bool operator==(Point a, Point b) => a.Equals(b);
     public static bool operator!=(Point a, Point b) => !(a.Equals(b));
-
+    public static Point operator+(Point a, Point b) => new Point(a.x + b.x, a.y + b.y);
+    public static Point operator-(Point a, Point b) => new Point(a.x - b.x, a.y - b.y);
+    public static bool operator<(Point a, Point b) => a.x < b.x && a.y < b.y;
+    public static bool operator >(Point a, Point b) => a.x > b.x || a.y > b.y;
+    public static Point operator *(Point a, int c) => new Point(a.x * c, a.y * c);
     public override bool Equals(object? point)
     {
         if (point is Point p){
@@ -122,16 +128,39 @@ public struct Point
         if (X < bounds.BottomRight.X && Y < bounds.BottomRight.Y) yield return new Point(x + 1, y + 1);
     }
 
-    public Point LeftAbove() => new Point(x - 1, y - 1);
+    public Point NorthWest() => new Point(x - 1, y - 1);
     public Point North() => new Point(x, y - 1);
-    public Point RightAbove() => new Point(x + 1, y - 1);
+    public Point NorthEast() => new Point(x + 1, y - 1);
     public Point West() => new Point(x - 1, y);
     public Point East() => new Point(x + 1, y);
-    public Point LeftBelow() => new Point(x - 1, y + 1);
+    public Point SouthWest() => new Point(x - 1, y + 1);
     public Point South() => new Point(x, y + 1);
-    public Point RightBelow() => new Point(x + 1, y + 1);
+    public Point SouthEast() => new Point(x + 1, y + 1);
 
     public static Point Zero = new Point(0, 0);
     public static bool operator ==(Point? a, Point? b) => a?.Equals(b) ?? false;
     public static bool operator !=(Point? a, Point? b) => !(a == b);
+
+    public int DistanceX(Point p) => (int)(p.X - X);
+    public int DistanceY(Point p) => (int)(p.Y - Y);
+    public double Distance(Point p) => Math.Sqrt( Math.Pow( DistanceX(p), 2) + Math.Pow(DistanceY(p), 2));
+    public bool ToWestOf(Point p) => X < p.X;
+    public bool ToEastOf(Point p) => X > p.X;
+    public bool ToNorthOf(Point p) => Y < p.Y;
+    public bool ToSouthOf(Point p) => Y > p.Y;
+
+    public static IEnumerable<Point> SortX(params IEnumerable<Point> points) => points.OrderBy(p => p.X).ThenBy(p => p.Y);
+    public static IEnumerable<Point> SortY(params IEnumerable<Point> points) => points.OrderBy(p => p.Y).ThenBy(p => p.X);
+
+    // multiply a vector by a scalar
+    public static Point Step(Point p1, Point p2, int steps = 1)
+    {
+        var distanceX = p1.DistanceX(p2);
+        var distanceY = p1.DistanceY(p2);
+
+        return new Point(p2.X + distanceX * steps, p2.Y + distanceY * steps);
+    }
+
+    public static implicit operator Point((long x, long y) p) => new Point(p.x, p.y);
+
 }
