@@ -1,11 +1,12 @@
-﻿using Command.Framework;
+﻿
+using Command.Framework;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace Command.Problems;
 
 
-public partial class _Name_: ProblemBase<int>
+public partial class _Name_ : ProblemBase<int>
 {
     public _Name_()
     {

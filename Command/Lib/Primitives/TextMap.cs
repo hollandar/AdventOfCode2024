@@ -5,7 +5,7 @@ class TextMap
 {
 
     List<string> map = new();
-    Bounds bounds = new Bounds(0, 0);
+    Bounds bounds = Bounds.Zero;
 
     public TextMap()
     {
@@ -78,6 +78,13 @@ class TextMap
     {
         return Where(x => x == c);
     }
+    
+    public IEnumerable<Point> Points()
+    {
+        for (int y = 0; y < bounds.Height; y++)
+            for (int x = 0; x < bounds.Width; x++)
+                yield return new Point(x, y);
+    }
 
     public void PrintMap()
     {
@@ -88,6 +95,40 @@ class TextMap
                 Console.Write(this[new Point(x, y)]);
             }
             Console.WriteLine();
+        }
+    }
+
+    // Flood fill within the map over elements with the same character, starting at some starting position
+    // Covers all adjacent points, including diagonals
+    // Pass (p) => p.AdjacentPointsWithoutDiagonals() to only cover cardinal directions
+    public IEnumerable<Point> Flood(Point startingPoint, Func<Point, IEnumerable<Point>>? points = null)
+    {
+        if ( points == null)
+        {
+            points = (point) => point.AdjacentPoints(Bounds);   
+        }
+
+        char target = this[startingPoint];
+        var visited = new HashSet<Point>();
+        var toVisit = new Queue<Point>();
+        toVisit.Enqueue(startingPoint);
+        while (toVisit.Count > 0)
+        {
+            var current = toVisit.Dequeue();
+            if (visited.Contains(current))
+            {
+                continue;
+            }
+            visited.Add(current);
+            if (this[current] == target)
+            {
+                yield return current;
+                var adjacent = points(current);
+                foreach (var adj in adjacent)
+                {
+                    toVisit.Enqueue(adj);
+                }
+            }
         }
     }
 
