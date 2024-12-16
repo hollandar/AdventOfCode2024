@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Text;
 
 namespace Command.Lib.Primitives;
 
@@ -24,6 +25,7 @@ public struct Bounds
     public static Bounds FromPoint(Point p) => new Bounds(p, p);
     public static Bounds FromPoints(params IEnumerable<Point> points)
     {
+        if (!points.Any()) return Zero;
         Bounds bounds = Bounds.FromPoint(points.First());
         foreach (var point in points) bounds = bounds.Expand(point);
         return bounds;
@@ -122,4 +124,56 @@ public struct Bounds
 
         return bounds;
     }
+
+    public Point WrapTo(Point p)
+    {
+        var x = p.X;
+        var y = p.Y;
+        while (x < Left) x += Width;
+        while (x > Right) x -= Width;
+        while (y < Top) y += Height;
+        while (y > Bottom) y -= Height;
+
+        return new Point(x, y);
+    }
+
+    public void Print(Func<Point, char> point)
+    {
+        for (long y = Top; y <= Bottom; y++)
+        {
+            for (long x = Left; x <= Right; x++)
+            {
+                Console.Write(point(new Point(x, y)));
+            }
+            Console.WriteLine();
+        }
+    }
+
+    public string ToString(Func<Point, char> point)
+    {
+        var build = new StringBuilder();
+        for (long y = Top; y <= Bottom; y++)
+        {
+            for (long x = Left; x <= Right; x++)
+            {
+                build.Append(point(new Point(x, y)));
+            }
+            build.AppendLine();
+        }
+
+        return build.ToString();
+    }
+
+    public IEnumerable<Point> Inside(params IEnumerable<Point> points)
+    {
+        foreach (var p in points)
+        {
+            if (Contains(p))
+            {
+                yield return p;
+            }
+        }
+    }
+
+
 }

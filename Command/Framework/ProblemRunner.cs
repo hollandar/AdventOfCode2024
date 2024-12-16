@@ -16,8 +16,9 @@ public static class ProblemRunner<TProblem, TReturn> where TProblem : IProblem<T
         if (File.Exists(exampleFileA))
         {
             var start = Stopwatch.GetTimestamp();
-            var stream = new FileStream(exampleFileA, FileMode.Open, FileAccess.Read);
+            using var stream = new FileStream(exampleFileA, FileMode.Open, FileAccess.Read);
             var hh = Activator.CreateInstance<TProblem>();
+            hh.MakeExample();
             hh.Load(stream);
             Console.Write("1) ");
             Console.WriteLine(hh.CalculateOne());
@@ -31,8 +32,9 @@ public static class ProblemRunner<TProblem, TReturn> where TProblem : IProblem<T
         if (File.Exists(exampleFileB))
         {
             var start = Stopwatch.GetTimestamp();
-            var stream = new FileStream(exampleFileB, FileMode.Open, FileAccess.Read);
+            using var stream = new FileStream(exampleFileB, FileMode.Open, FileAccess.Read);
             var hh = Activator.CreateInstance<TProblem>();
+            hh.MakeExample();
             hh.Load(stream);
             Console.Write("2) ");
             Console.WriteLine(hh.CalculateTwo());
@@ -40,8 +42,9 @@ public static class ProblemRunner<TProblem, TReturn> where TProblem : IProblem<T
         }
         else if (File.Exists(exampleFileA))
         {
-            var stream = new FileStream(exampleFileA, FileMode.Open, FileAccess.Read);
+            using var stream = new FileStream(exampleFileA, FileMode.Open, FileAccess.Read);
             var hh = Activator.CreateInstance<TProblem>();
+            hh.MakeExample();
             hh.Load(stream);
             var start = Stopwatch.GetTimestamp();
             Console.Write("2) ");
@@ -52,18 +55,27 @@ public static class ProblemRunner<TProblem, TReturn> where TProblem : IProblem<T
         var problemFile = $"./in/{fBase}1a.txt";
         if (File.Exists(problemFile))
         {
-            var start = Stopwatch.GetTimestamp();
-            Console.WriteLine("\nProblem\n-------");
-            var stream = new FileStream(problemFile, FileMode.Open, FileAccess.Read);
-            var hh = Activator.CreateInstance<TProblem>();
-            hh.Load(stream);
-            Console.Write("1) ");
-            Console.WriteLine(hh.CalculateOne());
-            Console.WriteLine($"   Took {Stopwatch.GetElapsedTime(start).TotalMilliseconds}");
-            start = Stopwatch.GetTimestamp();
-            Console.Write("2) ");
-            Console.WriteLine(hh.CalculateTwo());
-            Console.WriteLine($"   Took {Stopwatch.GetElapsedTime(start).TotalMilliseconds}");
+            {
+                var start = Stopwatch.GetTimestamp();
+                Console.WriteLine("\nProblem\n-------");
+                using var stream = new FileStream(problemFile, FileMode.Open, FileAccess.Read);
+                var hh = Activator.CreateInstance<TProblem>();
+                hh.MakeFinal();
+                hh.Load(stream);
+                Console.Write("1) ");
+                Console.WriteLine(hh.CalculateOne());
+                Console.WriteLine($"   Took {Stopwatch.GetElapsedTime(start).TotalMilliseconds}");
+            }
+            {
+                var start = Stopwatch.GetTimestamp();
+                using var stream = new FileStream(problemFile, FileMode.Open, FileAccess.Read);
+                var hh = Activator.CreateInstance<TProblem>();
+                hh.MakeFinal();
+                hh.Load(stream);
+                Console.Write("2) ");
+                Console.WriteLine(hh.CalculateTwo());
+                Console.WriteLine($"   Took {Stopwatch.GetElapsedTime(start).TotalMilliseconds}");
+            }
         }
         else
         {

@@ -25,4 +25,5 @@ using Command.Problems;
 //ProblemRunner < Command.Problems._2024.PlutonianPebbles, long>.Run("2024/PlutonianPebbles");
 //ProblemRunner <Command.Problems._2024.GardenGroups, int>.Run("2024/GardenGroups");
 //ProblemRunner<Command.Problems._2024.ResonantCollinearity, int>.Run("2024/ResonantCollinearity");
-ProblemRunner<Command.Problems._2024.ClawContraption, ulong>.Run("2024/ClawContraption");
+//ProblemRunner<Command.Problems._2024.ClawContraption, ulong>.Run("2024/ClawContraption");
+ProblemRunner<Command.Problems._2024.RestroomRedoubt, int>.Run("2024/RestroomRedoubt");
