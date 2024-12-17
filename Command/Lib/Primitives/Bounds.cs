@@ -175,5 +175,16 @@ public struct Bounds
         }
     }
 
+    public IEnumerable<Point> Points()
+    {
+        for (var y = Top; y <= Bottom; y++)
+        {
+            for (var x = Left; x <= Right; x++)
+            {
+                yield return new Point(x, y);
+            }
+        }
+    }
+
 
 }

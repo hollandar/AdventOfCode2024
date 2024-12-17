@@ -28,6 +28,8 @@ class TextMap
     public int Width => map.First().Length;
     public int Height => map.Count;
 
+    public List<string> Rows => map;
+
     public Bounds Bounds => bounds;
     public char this[Point p] => map[(int)p.Y][(int)p.X];
     public TextMap Clone()
@@ -49,6 +51,8 @@ class TextMap
             map[(int)p.Y] = new String(line);
         }
     }
+
+    public char Get(Point p) => this[p];
 
     public void ForEach(Action<Point> action)
     {
@@ -74,9 +78,26 @@ class TextMap
             }
         }
     }
+
     public IEnumerable<Point> Where(char c)
     {
         return Where(x => x == c);
+    }
+
+    public Point? FindFirst(char c)
+    {
+        for (long y = Bounds.Top; y <= bounds.Bottom; y++)
+        {
+            for (long x = Bounds.Left; x <= bounds.Right; x++)
+            {
+                if (this[(x,y)] == c)
+                {
+                    return (x, y);
+                }
+            }
+        }
+
+        return null;
     }
     
     public IEnumerable<Point> Points()

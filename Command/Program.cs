@@ -26,4 +26,5 @@ using Command.Problems;
 //ProblemRunner <Command.Problems._2024.GardenGroups, int>.Run("2024/GardenGroups");
 //ProblemRunner<Command.Problems._2024.ResonantCollinearity, int>.Run("2024/ResonantCollinearity");
 //ProblemRunner<Command.Problems._2024.ClawContraption, ulong>.Run("2024/ClawContraption");
-ProblemRunner<Command.Problems._2024.RestroomRedoubt, int>.Run("2024/RestroomRedoubt");
+//ProblemRunner<Command.Problems._2024.RestroomRedoubt, int>.Run("2024/RestroomRedoubt");
+ProblemRunner<Command.Problems._2024.WarehouseWoes, int>.Run("2024/WarehouseWoes");
