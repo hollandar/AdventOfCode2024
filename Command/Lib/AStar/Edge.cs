@@ -20,5 +20,10 @@ public sealed class Edge
         throw new Exception("Not connected");
     }
 
+    public override string ToString()
+    {
+        return $"{Start.Point} -> {End.Point} = {Cost}";
+    }
+
 
 }

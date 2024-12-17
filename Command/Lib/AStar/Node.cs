@@ -31,10 +31,15 @@ public sealed class Node
     {
         foreach (var edge in this.edges)
         {
-            if (edge.GetOpposingNode(this) == nextNode)
+            if (edge.End == nextNode)
                 return edge;
         }
 
         throw new Exception();
+    }
+
+    public override string ToString()
+    {
+        return Point.ToString();
     }
 }

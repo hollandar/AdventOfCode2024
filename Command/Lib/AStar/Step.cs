@@ -15,4 +15,16 @@ public sealed class Step
     public Edge? Edge { get { return edge; } }
 
     public bool IsTerminal { get { return this.edge == null; } }
+
+    public override string ToString()
+    {
+        if (Edge == null)
+        {
+            return $"Node: {Node}";
+        }
+        else
+        {
+            return $"{Edge.Start} -> {Edge.End} = {Edge.Cost}";
+        }
+    }
 }

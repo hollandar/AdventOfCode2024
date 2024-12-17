@@ -25,6 +25,7 @@ public sealed class DirectedPath
             foreach (var step in steps)
             {
                 yield return step.Edge!.Start;
+                yield return step.Edge!.End;
             }
 
             yield return steps.Last().Edge!.End;
@@ -44,4 +45,5 @@ public sealed class DirectedPath
     public bool Incomplete { get { return steps.Count == 0; } }
     public int NodeCount { get { return steps.Count + 2; } }
     public int EdgeCount { get { return steps.Count; } }
+    public int Cost { get { return GetEdges().Sum(r => r.Cost); } }
 }

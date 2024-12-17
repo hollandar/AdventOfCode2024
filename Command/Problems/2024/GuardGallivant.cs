@@ -6,16 +6,6 @@ using System.Diagnostics.Contracts;
 using System.Text.RegularExpressions;
 namespace Command.Problems._2024;
 
-public enum Facing
-{
-    North,
-    East,
-    South,
-    West
-}
-
-
-
 public partial class GuardGallivant : ProblemBase<int>
 {
     TextMap map = new();

@@ -52,8 +52,23 @@ class TextMap
         }
     }
 
-    public char Get(Point p) => this[p];
+    public char Get(Point p, char d)
+    {
+        if (Bounds.Contains(p))
+        {
+            return this[p];
+        }
+        return d;
+    }
 
+    public char Get(Point p)
+    {
+        if (!Bounds.Contains(p))
+        {
+            throw new Exception("Out of bounds.");
+        }
+        return this[p];
+    }
     public void ForEach(Action<Point> action)
     {
         for (int y = 0; y < Height; y++)
@@ -90,7 +105,7 @@ class TextMap
         {
             for (long x = Bounds.Left; x <= bounds.Right; x++)
             {
-                if (this[(x,y)] == c)
+                if (this[(x, y)] == c)
                 {
                     return (x, y);
                 }
@@ -99,7 +114,7 @@ class TextMap
 
         return null;
     }
-    
+
     public IEnumerable<Point> Points()
     {
         for (int y = 0; y < bounds.Height; y++)
@@ -107,13 +122,20 @@ class TextMap
                 yield return new Point(x, y);
     }
 
-    public void PrintMap()
+    public void PrintMap(Action<Point>? print = null)
     {
-        for (int y = 0; y < Height; y++)
+        for (var y = Bounds.Top; y <= Bounds.Bottom; y++)
         {
-            for (int x = 0; x < Width; x++)
+            for (var x = bounds.Left; x <= bounds.Right; x++)
             {
-                Console.Write(this[new Point(x, y)]);
+                if (print is null)
+                {
+                    Console.Write(this[new Point(x, y)]);
+                }
+                else
+                {
+                    print(new Point(x, y));
+                }
             }
             Console.WriteLine();
         }
@@ -124,9 +146,9 @@ class TextMap
     // Pass (p) => p.AdjacentPointsWithoutDiagonals() to only cover cardinal directions
     public IEnumerable<Point> Flood(Point startingPoint, Func<Point, IEnumerable<Point>>? points = null)
     {
-        if ( points == null)
+        if (points == null)
         {
-            points = (point) => point.AdjacentPoints(Bounds);   
+            points = (point) => point.AdjacentPoints(Bounds);
         }
 
         char target = this[startingPoint];

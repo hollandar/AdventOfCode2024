@@ -28,7 +28,7 @@ public static class PathFinder
                 do
                 {
                     var from = cameFrom[currentStep];
-                    steps.Insert(0, new Step(from, currentStep.GetEdgeBetween(from)));
+                    steps.Insert(0, new Step(from, from.GetEdgeBetween(currentStep)));
                     currentStep = from;
                 }
                 while (currentStep != start);
