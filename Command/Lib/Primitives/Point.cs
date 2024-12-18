@@ -182,4 +182,10 @@ public struct Point
         yield return this.SouthWest();
     }
 
+    public static Point Parse(string line)
+    {
+        var parts = line.Split(',', StringSplitOptions.RemoveEmptyEntries);
+        return new Point(long.Parse(parts[0].Trim()), long.Parse(parts[1].Trim()));
+    }
+
 }

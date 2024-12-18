@@ -189,13 +189,13 @@ namespace Command.Problems._2024
         }
 
         private MapObject? GetMapObject(Point p) => crates.FirstOrDefault(c => c.Contains(p));
-        private (bool canMove, MapObject[] affected) CanMove(MapObject mapObject, Point diff)
+        private (bool canMove, MapObject?[] affected) CanMove(MapObject mapObject, Point diff)
         {
             if (mapObject.Type == MapObjectType.Empty) return (true, []);
             if (mapObject.Type == MapObjectType.Wall) return (false, []);
             var directionalPoints = mapObject.Points.Select(r => r + diff).Where(p => !mapObject.Contains(p));
             var directionalObjects = directionalPoints.Select(p => GetMapObject(p));
-            var canMove = directionalObjects.All(p => p.Type == MapObjectType.Empty);
+            var canMove = directionalObjects.All(p => p?.Type == MapObjectType.Empty);
             if (canMove) return (true, directionalPoints.Select(r => GetMapObject(r)).ToArray());
 
             var movingObjects = directionalPoints.Select(p => GetMapObject(p)).ToArray();

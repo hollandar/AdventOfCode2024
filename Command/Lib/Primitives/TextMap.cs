@@ -1,7 +1,7 @@
 ﻿
 namespace Command.Lib.Primitives;
 
-class TextMap
+public class TextMap
 {
 
     List<string> map = new();
@@ -14,6 +14,16 @@ class TextMap
     public TextMap(IEnumerable<string> lines)
     {
         foreach (var line in lines)
+        {
+            Add(line);
+        }
+    }
+
+    public TextMap(Bounds bounds, char d = ' ')
+    {
+        if (bounds.TopLeft != (0,0)) throw new ArgumentException("Bounds must start at 0,0");
+        var lines = Enumerable.Repeat(new string(d, (int)bounds.Width), (int)bounds.Height);
+        foreach (var  line in lines)
         {
             Add(line);
         }

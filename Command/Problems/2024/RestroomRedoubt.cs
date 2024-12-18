@@ -98,18 +98,12 @@ public partial class RestroomRedoubt : ProblemBase<int>
                 longestSubset > 5
             )
             {
-                Console.WriteLine(i);
-                bounds.Print(p => robots.Where(r => r.Position == p).Count() switch
-                {
-                    0 => '.',
-                    int count => (char)('0' + count)
-                });
-                Console.ReadLine();
+                return i;
             }
 
         }
 
-        return -1;
+        throw new UnreachableException();
 
     }
 }
