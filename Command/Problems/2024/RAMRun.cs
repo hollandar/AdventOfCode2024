@@ -1,5 +1,6 @@
 ﻿
 using Command.Framework;
+using Command.Lib.Alg;
 using Command.Lib.Primitives;
 using System.Diagnostics;
 using System.Security.Cryptography;
@@ -7,9 +8,6 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 
 namespace Command.Problems._2024;
-
-
-
 
 public partial class RAMRun : ProblemBase<int>
 {
@@ -40,7 +38,6 @@ public partial class RAMRun : ProblemBase<int>
             map.Set(byteInstruction, '#');
         }
 
-        map.PrintMap();
         int minimumPathLength = int.MaxValue;
         MinPath(map, Point.Zero, map.Bounds.BottomRight, ref minimumPathLength);
 
@@ -85,24 +82,32 @@ public partial class RAMRun : ProblemBase<int>
 
     public override int CalculateTwo()
     {
-        for (int thisCycles = cycles; thisCycles < byteInstructions.Count ; thisCycles += 1)
+        var search = new BinarySearch(0, byteInstructions.Count - 2);
+        var ix = search.Find((cycles) =>
         {
             TextMap map = new TextMap(bounds, '.');
-            foreach (var byteInstruction in byteInstructions.Take(thisCycles))
+            foreach (var byteInstruction in byteInstructions.Take(cycles))
             {
                 map.Set(byteInstruction, '#');
             }
+            int pathLength = int.MaxValue;
+            MinPath(map, Point.Zero, map.Bounds.BottomRight, ref pathLength);
 
-            int isPathBlocked = int.MaxValue;
-            MinPath(map, Point.Zero, map.Bounds.BottomRight, ref isPathBlocked);
-            if (isPathBlocked == int.MaxValue)
-            {
-                Console.WriteLine("Last cell added at " + byteInstructions.Take(thisCycles).Last());
-                return thisCycles;
-            }
-        }
+            map.Set(byteInstructions.Skip(cycles).First(), '#');
+            int nextPathLength = int.MaxValue;
+            MinPath(map, Point.Zero, map.Bounds.BottomRight, ref nextPathLength);
 
-        throw new Exception("Path is never blocked.");
+
+            return
+            pathLength != int.MaxValue && nextPathLength == int.MaxValue ? 0 :
+            pathLength == int.MaxValue && nextPathLength == int.MaxValue ? -1 : 1;
+        });
+
+        if (ix == -1) throw new Exception("No cross over found.");
+
+        var lastCell = byteInstructions.Skip(ix).First();
+        Console.WriteLine("Last cell added at " + lastCell);
+        return ix;
     }
 
 
