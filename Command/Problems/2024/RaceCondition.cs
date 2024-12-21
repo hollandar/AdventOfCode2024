@@ -116,7 +116,7 @@ public partial class RaceCondition : ProblemBase<int>
                     continue;
                 }
 
-                var distance = Math.Abs(point.Key.DistanceX(otherPoint.Key)) + Math.Abs(point.Key.DistanceY(otherPoint.Key));
+                var distance = point.Key.AbsoluteDistance(otherPoint.Key);
                 if (distance <= 20)
                 {
                     var toStart = endDistance - distanceToEnd[point.Key];

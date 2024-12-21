@@ -133,6 +133,7 @@ public struct Point
     public int DistanceX(Point p) => (int)(p.X - X);
     public int DistanceY(Point p) => (int)(p.Y - Y);
     public double Distance(Point p) => Math.Sqrt( Math.Pow( DistanceX(p), 2) + Math.Pow(DistanceY(p), 2));
+    public int AbsoluteDistance(Point p) => Math.Abs(DistanceX(p)) + Math.Abs(DistanceY(p));
     public bool ToWestOf(Point p) => X < p.X;
     public bool ToEastOf(Point p) => X > p.X;
     public bool ToNorthOf(Point p) => Y < p.Y;
