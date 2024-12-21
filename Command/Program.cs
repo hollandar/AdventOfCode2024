@@ -31,4 +31,5 @@ using Command.Problems;
 //ProblemRunner<Command.Problems._2024.ReindeerMaze, int>.Run("2024/ReindeerMaze");
 //ProblemRunner<Command.Problems._2024.ChronospatialComputer, string>.Run("2024/ChronospatialComputer");
 //ProblemRunner<Command.Problems._2024.RAMRun, int>.Run("2024/RAMRun");
-ProblemRunner<Command.Problems._2024.LinenLayout, long>.Run("2024/LinenLayout");
+//ProblemRunner<Command.Problems._2024.LinenLayout, long>.Run("2024/LinenLayout");
+ProblemRunner<Command.Problems._2024.RaceCondition, int>.Run("2024/RaceCondition");
