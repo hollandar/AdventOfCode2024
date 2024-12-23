@@ -51,7 +51,7 @@ public partial class CubeConundrum : ProblemBase<int>
         }
     }
 
-    public override int CalculateOne()
+    public override int CalculateOne(bool exampleData)
     {
         var sum = 0;
         foreach (var game in gameRecords)
@@ -76,7 +76,7 @@ public partial class CubeConundrum : ProblemBase<int>
         return sum;
     }
 
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         var sum = 0;
 

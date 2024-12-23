@@ -25,7 +25,7 @@ public partial class PlutonianPebbles : ProblemBase<long>
         stones = line.Split(" ").Select(long.Parse).ToList();
     }
 
-    public override long CalculateOne()
+    public override long CalculateOne(bool exampleData)
     {
         int cycles = 25;
         long count = 0;
@@ -92,7 +92,7 @@ public partial class PlutonianPebbles : ProblemBase<long>
         }
     }
 
-    public override long CalculateTwo()
+    public override long CalculateTwo(bool exampleData)
     {
         int cycles = 75;
         long count = 0;

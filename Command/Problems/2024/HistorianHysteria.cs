@@ -24,7 +24,7 @@ public partial class HistorianHysteria : ProblemBase<int>
         l2.Add(int.Parse(match.Groups[2].Value));
     }
 
-    public override int CalculateOne()
+    public override int CalculateOne(bool exampleData)
     {
         int cdist = 0;
         Debug.Assert(l1.Count == l2.Count);
@@ -41,7 +41,7 @@ public partial class HistorianHysteria : ProblemBase<int>
         return cdist;
     }
 
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         int cdist = 0;
         Debug.Assert(l1.Count == l2.Count);

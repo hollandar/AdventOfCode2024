@@ -21,7 +21,7 @@ public partial class ResonantCollinearity : ProblemBase<int>
         nodes.Add(line);
     }
 
-    public override int CalculateOne()
+    public override int CalculateOne(bool exampleData)
     {
         var antinodes = new TextMap(Enumerable.Repeat(new String('.', nodes.Width), nodes.Height));
         nodes.ForEach((Point p) =>
@@ -48,7 +48,7 @@ public partial class ResonantCollinearity : ProblemBase<int>
         return antinodes.Where(c => c != '.').Count();
     }
 
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         var antinodes = new TextMap(Enumerable.Repeat(new String('.', nodes.Width), nodes.Height));
         nodes.ForEach((Point p) =>

@@ -16,12 +16,12 @@ public partial class _Name_ : ProblemBase<int>
     {
     }
 
-    public override int CalculateOne()
+    public override int CalculateOne(bool exampleData)
     {
         return default!;
     }
 
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         return default!;
     }

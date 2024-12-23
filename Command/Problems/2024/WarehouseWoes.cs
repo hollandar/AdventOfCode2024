@@ -64,7 +64,7 @@ namespace Command.Problems._2024
         }
 
         // This solution is text based only
-        public override int CalculateOne()
+        public override int CalculateOne(bool exampleData)
         {
             foreach (char instruction in instructions)
             {
@@ -211,7 +211,7 @@ namespace Command.Problems._2024
         }
 
         // This is object based and uses recursion to find moves.
-        public override int CalculateTwo()
+        public override int CalculateTwo(bool exampleData)
         {
             // Transform the map and create the objects
             var newMap = new TextMap();

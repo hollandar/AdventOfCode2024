@@ -19,9 +19,6 @@ public abstract class ProblemBase<TReturn> : IProblem<TReturn>
     }
 
     protected abstract void Line(string line);
-    public abstract TReturn CalculateOne();
-    public abstract TReturn CalculateTwo();
-    public virtual void MakeExample() { }
-    public virtual void MakeFinal() { }
-
+    public abstract TReturn CalculateOne(bool exampleData);
+    public abstract TReturn CalculateTwo(bool exampleData);
 }

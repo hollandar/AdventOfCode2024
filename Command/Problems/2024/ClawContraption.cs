@@ -57,7 +57,7 @@ public partial class ClawContraption : ProblemBase<ulong>
         }
     }
 
-    public override ulong CalculateOne()
+    public override ulong CalculateOne(bool exampleData)
     {
         ulong sumCost = 0;
         foreach (var rule in rules)
@@ -106,7 +106,7 @@ public partial class ClawContraption : ProblemBase<ulong>
         }
     }
 
-    public override ulong CalculateTwo()
+    public override ulong CalculateTwo(bool exampleData)
     {
         ulong sumCost = 0;
         foreach (var rule in rules)

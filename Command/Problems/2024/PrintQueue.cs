@@ -62,7 +62,7 @@ public partial class PrintQueue : ProblemBase<int>
     }
 
 
-    public override int CalculateOne()
+    public override int CalculateOne(bool exampleData)
     {
         var midSum = 0;
         foreach (var pageList in pages)
@@ -80,7 +80,7 @@ public partial class PrintQueue : ProblemBase<int>
         return midSum;
     }
 
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         var midSum = 0;
         foreach (var pageList in pages)

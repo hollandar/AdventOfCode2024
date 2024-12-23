@@ -3,8 +3,6 @@
 public interface IProblem<TReturn>
 {
     void Load(Stream stream);
-    TReturn CalculateOne();
-    TReturn CalculateTwo();
-    void MakeExample();
-    void MakeFinal();
+    TReturn CalculateOne(bool exampleData);
+    TReturn CalculateTwo(bool exampleData);
 }

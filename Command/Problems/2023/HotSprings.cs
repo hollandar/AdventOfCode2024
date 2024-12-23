@@ -30,7 +30,7 @@ public partial class HotSprings : ProblemBase<ulong>
         }
     }
 
-    public override ulong CalculateOne()
+    public override ulong CalculateOne(bool exampleData)
     {
         ulong count = 0;
         foreach (var configuration in pipeConfigurations)
@@ -178,7 +178,7 @@ public partial class HotSprings : ProblemBase<ulong>
         return true;
     }
 
-    public override ulong CalculateTwo()
+    public override ulong CalculateTwo(bool exampleData)
     {
         ulong count = 0;
         int step = 0;

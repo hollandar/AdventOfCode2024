@@ -22,7 +22,7 @@ public partial class HoofIt : ProblemBase<int>
 
     int ToHeight(char c) => (int)(c - '0');
 
-    public override int CalculateOne()
+    public override int CalculateOne(bool exampleData)
     {
         int count = 0;
         var trailHeads = map.Where('0').ToList();
@@ -61,7 +61,7 @@ public partial class HoofIt : ProblemBase<int>
         TraverseDistinct(point.South(), height + 1, reachable);
     }
 
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         int count = 0;
         var trailHeads = map.Where('0').ToList();

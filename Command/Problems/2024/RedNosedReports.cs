@@ -40,7 +40,7 @@ public partial class RedNosedReports : ProblemBase<int>
         return climbs.All(c => c > 0 && c <= 3) && (directions.All(d => d == 1) || directions.All(d => d == -1));
     }
 
-    public override int CalculateOne()
+    public override int CalculateOne(bool exampleData)
     {
         int count = 0;
         foreach (var report in reports)
@@ -55,7 +55,7 @@ public partial class RedNosedReports : ProblemBase<int>
     }
 
     
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         int count = 0;
         foreach (var report in reports)

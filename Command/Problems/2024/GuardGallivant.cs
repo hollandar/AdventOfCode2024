@@ -23,7 +23,7 @@ public partial class GuardGallivant : ProblemBase<int>
         }
     }
 
-    public override int CalculateOne()
+    public override int CalculateOne(bool exampleData)
     {
         HashSet<Point> visited = new();
         Contract.Requires(map.Bounds.Contains(guardStart));
@@ -130,7 +130,7 @@ public partial class GuardGallivant : ProblemBase<int>
         };
     }
 
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         var count = 0;
         HashSet<Point> visited = new();

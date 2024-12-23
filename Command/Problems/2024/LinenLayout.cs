@@ -30,7 +30,7 @@ public partial class LinenLayout : ProblemBase<long>
     }
 
 
-    public override long CalculateOne()
+    public override long CalculateOne(bool exampleData)
     {
         var patternLengths = patterns.Select(r => r.Length).Distinct().OrderByDescending(r => r).ToArray();
         var designCount = 0;
@@ -71,7 +71,7 @@ public partial class LinenLayout : ProblemBase<long>
         return designCount;
     }
 
-    public override long CalculateTwo()
+    public override long CalculateTwo(bool exampleData)
     {
         // Recursion is too slow.
         // Approach instead is to find out how many tokens are valid at each location and sum up the paths to the end of the string based on those valid tokens.

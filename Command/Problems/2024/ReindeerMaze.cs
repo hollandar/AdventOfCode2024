@@ -24,7 +24,7 @@ public partial class ReindeerMaze : ProblemBase<int>
         map.Add(line);
     }
 
-    public override int CalculateOne()
+    public override int CalculateOne(bool exampleData)
     {
         var start = map.FindFirst('S')!.Value;
         var end = map.FindFirst('E')!.Value;
@@ -85,7 +85,7 @@ public partial class ReindeerMaze : ProblemBase<int>
     record Path(Point[] path, int cost);
 
     HashSet<char> openPositions = new(['S', 'E', '.']);
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         var start = map.FindFirst('S')!.Value;
         var end = map.FindFirst('E')!.Value;

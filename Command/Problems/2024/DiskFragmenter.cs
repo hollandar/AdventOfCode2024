@@ -46,7 +46,7 @@ public partial class DiskFragmenter : ProblemBase<long>
     }
 
 
-    public override long CalculateOne()
+    public override long CalculateOne(bool exampleData)
     {
         var defragmentedDisk = disk.ToArray();
         int i = 0;
@@ -80,7 +80,7 @@ public partial class DiskFragmenter : ProblemBase<long>
 
     record Block(int index, int item, int length);
 
-    public override long CalculateTwo()
+    public override long CalculateTwo(bool exampleData)
     {
         var fragmentedDisk = disk.ToArray();
         List<Block> blocks = new();

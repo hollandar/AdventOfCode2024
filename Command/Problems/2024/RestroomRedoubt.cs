@@ -23,9 +23,10 @@ public class Robot(Point position, Point velocity)
 public partial class RestroomRedoubt : ProblemBase<int>
 {
     List<Robot> robots = new();
-    Bounds bounds = Bounds.Zero;
+    Bounds bounds = new Bounds(new Point(0, 0), new Point(100, 102));
     public RestroomRedoubt()
     {
+        
     }
 
     protected override void Line(string line)
@@ -39,10 +40,12 @@ public partial class RestroomRedoubt : ProblemBase<int>
         }
     }
 
-    public override void MakeExample() => bounds = new Bounds(new Point(0, 0), new Point(10, 6));
-    public override void MakeFinal() => bounds = new Bounds(new Point(0, 0), new Point(100, 102));
-    public override int CalculateOne()
+    public override int CalculateOne(bool exampleData)
     {
+        if (exampleData)
+        {
+            bounds = new Bounds(new Point(0, 0), new Point(10, 6));
+        }
         for (int i = 0; i < 100; i++)
         {
             foreach (var robot in robots)
@@ -65,7 +68,7 @@ public partial class RestroomRedoubt : ProblemBase<int>
         return f1 * f2 * f3 * f4;
     }
 
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         if (bounds.Width < 50) return 0;
 

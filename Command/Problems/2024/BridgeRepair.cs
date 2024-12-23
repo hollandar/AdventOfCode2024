@@ -32,7 +32,7 @@ public partial class BridgeRepair : ProblemBase<ulong>
         this.equations.Add(new Equation(testValue, numbers));
     }
 
-    public override ulong CalculateOne()
+    public override ulong CalculateOne(bool exampleData)
     {
         ulong sum = 0;
         foreach (var eq in equations)
@@ -117,7 +117,7 @@ public partial class BridgeRepair : ProblemBase<ulong>
         return plusResult || multiplyResult || concatResult;
     }
 
-    public override ulong CalculateTwo()
+    public override ulong CalculateTwo(bool exampleData)
     {
         ulong sum = 0;
         foreach (var eq in equations)

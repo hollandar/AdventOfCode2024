@@ -16,7 +16,7 @@ public partial class CeresSearch : ProblemBase<int>
         _list.Add(line);
     }
 
-    public override int CalculateOne()
+    public override int CalculateOne(bool exampleData)
     {
         var count = 0;
         Bounds bounds = new Bounds(new Point(0, 0), new Point(_list.First().Length - 1, _list.Count - 1));
@@ -65,7 +65,7 @@ public partial class CeresSearch : ProblemBase<int>
         return false;
     }
 
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         Bounds bounds = new Bounds(new Point(0, 0), new Point(_list.First().Length - 1, _list.Count - 1));
         var atPoint = (Point p, char[] c) =>

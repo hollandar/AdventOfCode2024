@@ -17,7 +17,7 @@ public partial class Trebuchet : ProblemBase<int>
         lines.Add(line);
     }
 
-    public override int CalculateOne()
+    public override int CalculateOne(bool exampleData)
     {
         var sum = 0;
         foreach (var line in lines)
@@ -53,7 +53,7 @@ public partial class Trebuchet : ProblemBase<int>
         {"eight", 8 },
         {"nine", 9 },
     };
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         var sum = 0;
         foreach (var line in lines)

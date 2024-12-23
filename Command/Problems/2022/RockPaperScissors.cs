@@ -52,7 +52,7 @@ public partial class RockPaperScissors : ProblemBase<int>
         outcomes.Add(new GameOutcome(p1, o2));
     }
 
-    public override int CalculateOne()
+    public override int CalculateOne(bool exampleData)
     {
         int sum = 0;
         
@@ -97,7 +97,7 @@ public partial class RockPaperScissors : ProblemBase<int>
 
     bool Draw(Play p1, Play p2) => p1 == p2;
 
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         int sum = 0;
 

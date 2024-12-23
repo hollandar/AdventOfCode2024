@@ -30,7 +30,7 @@ public partial class ChronospatialComputer : ProblemBase<string>
         }
     }
 
-    public override string CalculateOne()
+    public override string CalculateOne(bool exampleData)
     {
         List<long> output = new();
         RunVM(output);
@@ -107,11 +107,9 @@ public partial class ChronospatialComputer : ProblemBase<string>
         }
     }
 
-    bool final = false;
-    public override void MakeFinal() => final = true;
-    public override string CalculateTwo()
+    public override string CalculateTwo(bool exampleData)
     {
-        if (!final) return "Not final";
+        if (exampleData) return "Not final";
 
         // Running the VM with numbers from 0 up helps you determine the step change in values from left to right
         // Powers of 8 affect bits in groups of 3 due without affecting bits in lower or higher groups

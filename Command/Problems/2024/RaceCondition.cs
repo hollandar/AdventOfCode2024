@@ -20,7 +20,7 @@ public partial class RaceCondition : ProblemBase<int>
     }
 
     public record Cheat(int distance, Point cheatPoint, Point jumpTo);
-    public override int CalculateOne()
+    public override int CalculateOne(bool exampleData)
     {
         var start = map.FindFirst('S').Value;
         var end = map.FindFirst('E').Value;
@@ -84,7 +84,7 @@ public partial class RaceCondition : ProblemBase<int>
         return distanceToEnd;
     }
 
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         var start = map.FindFirst('S').Value;
         var end = map.FindFirst('E').Value;

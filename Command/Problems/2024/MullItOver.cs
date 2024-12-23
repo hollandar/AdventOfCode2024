@@ -31,7 +31,7 @@ public partial class MullItOver: ProblemBase<int>
         instructions.AddRange(newInstructions);
     }
 
-    public override int CalculateOne()
+    public override int CalculateOne(bool exampleData)
     {
         return instructions
             .Where(r => MulRegex().IsMatch(r))
@@ -40,7 +40,7 @@ public partial class MullItOver: ProblemBase<int>
             .Sum();
     }
 
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         bool enabled = true;
         int sum = 0;

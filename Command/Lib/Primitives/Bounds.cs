@@ -36,6 +36,7 @@ public struct Bounds
     public long Right => BottomRight.X;
     public long Height => BottomRight.Y - TopLeft.Y + 1;
     public long Width => BottomRight.X - TopLeft.X + 1;
+    public long Size => Width * Height;
     public Bounds LocalBounds => new Bounds((0, 0), (Right - Left, Bottom - Top));
 
     public static Bounds Zero = Bounds.FromPoint((0, 0));

@@ -28,7 +28,7 @@ public partial class GardenGroups : ProblemBase<int>
         map.Add(line);
     }
 
-    public override int CalculateOne()
+    public override int CalculateOne(bool exampleData)
     {
         List<GardenGroup> groups = GetGroups();
 
@@ -72,7 +72,7 @@ public partial class GardenGroups : ProblemBase<int>
         return groups;
     }
 
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         List<GardenGroup> groups = GetGroups();
 

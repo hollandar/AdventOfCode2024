@@ -24,14 +24,14 @@ public partial class RAMRun : ProblemBase<int>
         byteInstructions.Add(Point.Parse(line));
     }
 
-    public override void MakeFinal()
+    public override int CalculateOne(bool exampleData)
     {
-        bounds = new Bounds(Point.Zero, (70, 70));
-        cycles = 1024;
-    }
+        if (!exampleData)
+        {
+            bounds = new Bounds(Point.Zero, (70, 70));
+            cycles = 1024;
+        }
 
-    public override int CalculateOne()
-    {
         TextMap map = new TextMap(bounds, '.');
         foreach (var byteInstruction in byteInstructions.Take(cycles))
         {
@@ -80,7 +80,7 @@ public partial class RAMRun : ProblemBase<int>
         }
     }
 
-    public override int CalculateTwo()
+    public override int CalculateTwo(bool exampleData)
     {
         var search = new BinarySearch(0, byteInstructions.Count - 2);
         var ix = search.Find((cycles) =>
