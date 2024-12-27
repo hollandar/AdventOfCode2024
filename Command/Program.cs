@@ -35,4 +35,5 @@ using Command.Problems;
 //ProblemRunner<Command.Problems._2024.RaceCondition, int>.Run("2024/RaceCondition");
 //ProblemRunner<Command.Problems._2024.KeypadConundrum, long>.Run("2024/KeypadConundrum");
 //ProblemRunner<Command.Problems._2024.MonkeyMarket, long>.Run("2024/MonkeyMarket");
-ProblemRunner<Command.Problems._2024.LANParty, string>.Run("2024/LANParty");
+//ProblemRunner<Command.Problems._2024.CrossedWires, long>.Run("2024/CrossedWires");
+ProblemRunner<Command.Problems._2024.CodeChronicle, int>.Run("2024/CodeChronicle");
