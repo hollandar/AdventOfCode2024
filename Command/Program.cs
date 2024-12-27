@@ -33,4 +33,5 @@ using Command.Problems;
 //ProblemRunner<Command.Problems._2024.RAMRun, int>.Run("2024/RAMRun");
 //ProblemRunner<Command.Problems._2024.LinenLayout, long>.Run("2024/LinenLayout");
 //ProblemRunner<Command.Problems._2024.RaceCondition, int>.Run("2024/RaceCondition");
-ProblemRunner<Command.Problems._2024.KeypadConundrum, long>.Run("2024/KeypadConundrum");
+//ProblemRunner<Command.Problems._2024.KeypadConundrum, long>.Run("2024/KeypadConundrum");
+ProblemRunner<Command.Problems._2024.MonkeyMarket, long>.Run("2024/MonkeyMarket");

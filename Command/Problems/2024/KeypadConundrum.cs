@@ -286,16 +286,19 @@ public partial class KeypadConundrum : ProblemBase<long>
         long length = 0;
         foreach (var segment in segments)
         {
+            Console.WriteLine($"{String.Join("", Enumerable.Repeat(" ", 10 - depth * 2))} {segment}");
             var subInstructions = ExpandInstructions(segment);
             long minLength = long.MaxValue;
 
             foreach (var sub in subInstructions)
             {
+                Console.WriteLine($"{String.Join("", Enumerable.Repeat(" ", 10 - depth * 2))} ${sub}");
                 var subLength = ExpandSegment(sub, depth - 1);
                 minLength = Math.Min(minLength, subLength);
             }
 
             length += minLength;
+            Console.WriteLine($"{String.Join("", Enumerable.Repeat(" ", 10 - depth * 2))} #{minLength} {length}");
 
         }
 
@@ -329,6 +332,10 @@ public partial class KeypadConundrum : ProblemBase<long>
 
     public override long CalculateOne(bool exampleData)
     {
+        Console.WriteLine();
+        ExpandSegment("<A", 3);
+
+        return default;
         long length = 0;
         foreach (var code in codes)
         {
@@ -349,6 +356,8 @@ public partial class KeypadConundrum : ProblemBase<long>
 
     public override long CalculateTwo(bool exampleData)
     {
+        return default;
+
         long length = 0;
         foreach (var code in codes)
         {
