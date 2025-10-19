@@ -1,3 +1,3 @@
 #!/bin/bash
-T=$(terraform)
+T=$("terraform")
 echo "T: $T"
