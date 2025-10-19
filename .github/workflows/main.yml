@@ -12,13 +12,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Make deploy.sh
-        run: |
-          echo "A=\$(pwd)" > ./deploy.sh
-          echo "echo $A" >> ./deploy.sh
-        
       - name: Make script executable
-        run: chmod +x ./deploy.sh
+        run: chmod +x ./.github/workdlows/deploy.sh
 
       - name: Run deploy script
-        run: ./deploy.sh
+        run: ./.github/workflows/deploy.sh
