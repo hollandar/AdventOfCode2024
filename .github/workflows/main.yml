@@ -13,7 +13,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Make deploy.sh
-        run: echo "A=$(pwd)" > ./deploy.sh
+        run: |
+          echo "A=$(pwd)" > ./deploy.sh
+          echo "echo $A"
         
       - name: Make script executable
         run: chmod +x ./deploy.sh
