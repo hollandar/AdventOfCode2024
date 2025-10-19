@@ -1,2 +1,2 @@
-A=$(pwd)
+A=$(echo 'testing')
 echo $A
