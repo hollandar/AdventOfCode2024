@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Make deploy.sh
-        run: echo "A=$(echo "X")
+        run: echo "A=$(pwd)
         
       - name: Make script executable
         run: chmod +x ./deploy.sh
