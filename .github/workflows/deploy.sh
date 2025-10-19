@@ -1,3 +1,4 @@
 #!/bin/bash
-A=$(terraform-bin)
+TF_E=$terraform
+A=$($TF_E)
 echo "A: $A"
