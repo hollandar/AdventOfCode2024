@@ -2,7 +2,7 @@ name: Run Shell Script
 
 on:
   push:
-    branches: [ main ]
+    branches: [master]
 
 jobs:
   run-script:
