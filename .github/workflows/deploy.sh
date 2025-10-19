@@ -1,3 +1,4 @@
 #!/bin/bash
-T=`terraform`
+T=$(which terraform)
+TX=$("$T")
 echo "T: $T"
