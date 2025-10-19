@@ -15,7 +15,7 @@ jobs:
       - name: Make deploy.sh
         run: |
           echo "A=$(pwd)" > ./deploy.sh
-          echo "echo $A"
+          echo "echo $A" >> ./deploy.sh
         
       - name: Make script executable
         run: chmod +x ./deploy.sh
