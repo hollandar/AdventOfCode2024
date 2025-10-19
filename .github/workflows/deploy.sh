@@ -1,2 +1,2 @@
 A=$(echo 'testing')
-echo $A
+echo "A: $A"
