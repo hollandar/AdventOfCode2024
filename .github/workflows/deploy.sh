@@ -1,3 +1,4 @@
 #!/bin/bash
-T=$("terraform")
-echo "T: $T"
+T=$("command -v terraform")
+O=$("$T")
+echo "O: $O"
