@@ -1,3 +1,3 @@
 #!/bin/bash
 T=$(terraform)
-echo $T
+echo "T: $T"
