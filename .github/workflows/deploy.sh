@@ -1,4 +1,4 @@
 #!/bin/bash
 T=$(which terraform)
 TX=$("$T")
-echo "T: $T"
+echo "TX: $TX"
