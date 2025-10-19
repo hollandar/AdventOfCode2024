@@ -1,0 +1,2 @@
+A=$(pwd)
+echo $A
