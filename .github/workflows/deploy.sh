@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo "PATH: $PATH"
-echo "Terraform resolved to: $(command -v terraform)"
+BIN=$(terraform)
 
-T=$(which terraform)
-TX=$("$T")
-echo "TX: $TX"
+echo "$BIN"
